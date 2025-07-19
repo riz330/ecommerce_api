@@ -1,154 +1,109 @@
-🛍️ E-Commerce API with Django REST Framework
-https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray
-https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
-https://img.shields.io/badge/redis-%2523DD0031.svg?style=for-the-badge&logo=redis&logoColor=white
-https://img.shields.io/badge/Django%2520Channels-2.0-green?style=for-the-badge
+# 🛍️ E-Commerce API with Django REST Framework
 
-A full-featured e-commerce API built with Django REST Framework featuring:
+![Django REST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
+![Django Channels](https://img.shields.io/badge/Django%20Channels-2.0-green?style=for-the-badge)
 
-JWT Authentication
+A comprehensive e-commerce API built with Django REST Framework, featuring JWT authentication, real-time notifications, order processing, and Redis caching for optimal performance.
 
-Product & Category Management
+## 📋 Table of Contents
 
-Order Processing System
+- [✨ Features](#-features)
+- [🛠 Tech Stack](#-tech-stack)
+- [🚀 Quick Start](#-quick-start)
+- [📚 API Documentation](#-api-documentation)
+- [🧪 Testing](#-testing)
+- [🚀 Deployment](#-deployment)
+- [🛠 Troubleshooting](#-troubleshooting)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
 
-Real-time Notifications
+## ✨ Features
 
-Redis Caching
+### 🔐 Authentication & User Management
+- JWT Authentication with Access & Refresh tokens
+- Secure user registration and profile management
+- Password security and validation
+- Complete order history tracking
 
-Comprehensive Testing
+### 📦 Product Management
+- Full CRUD operations for products (Admin only)
+- Hierarchical category management
+- Real-time stock tracking and updates
+- Advanced filtering and pagination
 
-📋 Table of Contents
-Features
+### 🛒 Order Processing System
+- Dynamic shopping cart functionality
+- Complete order lifecycle (Pending → Shipped → Delivered)
+- Real-time status updates via WebSockets
+- Comprehensive order history
 
-Tech Stack
+### ⚡ Performance & Optimization
+- Redis caching for products and categories
+- Intelligent cache invalidation
+- Optimized database queries
+- Real-time notifications
 
-Setup
+## 🛠 Tech Stack
 
-Prerequisites
+**Backend Framework:**
+- Python 3.12
+- Django 5.2
+- Django REST Framework
+- SimpleJWT for Authentication
 
-Installation
+**Database & Caching:**
+- PostgreSQL
+- Redis (Caching & Channels Layer)
 
-Environment Variables
+**Real-time Features:**
+- Django Channels for WebSockets
 
-Database Setup
+**Testing Suite:**
+- pytest & pytest-django
+- pytest-cov for coverage
+- Factory Boy for test data
 
-Running the Server
+## 🚀 Quick Start
 
-API Documentation
+### Prerequisites
 
-Authentication
+Ensure you have the following installed:
+- Python 3.12+
+- PostgreSQL
+- Redis
+- Virtual Environment (recommended)
 
-Products
+### Installation
 
-Orders
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/ecommerce-api.git
+   cd ecommerce-api
+   ```
 
-WebSockets
+2. **Set up virtual environment**
+   ```bash
+   python -m venv venv
+   
+   # Windows
+   venv\Scripts\activate
+   
+   # macOS/Linux
+   source venv/bin/activate
+   ```
 
-Testing
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Deployment
+### Environment Configuration
 
-Troubleshooting
+Create a `.env` file in the project root:
 
-Contributing
-
-License
-
-✨ Features
-User System
-✅ JWT Authentication (Access & Refresh tokens)
-
-✅ User Registration & Profile Management
-
-✅ Secure Password Handling
-
-✅ Order History Tracking
-
-Product Management
-✅ Product CRUD Operations (Admin Only)
-
-✅ Category Management
-
-✅ Stock Tracking & Updates
-
-✅ Product Filtering & Pagination
-
-Order System
-✅ Shopping Cart Functionality
-
-✅ Order Processing (Pending → Shipped → Delivered)
-
-✅ Real-time Status Updates via WebSockets
-
-✅ Order History for Users
-
-Performance
-✅ Redis Caching for Products & Categories
-
-✅ Automatic Cache Invalidation
-
-✅ Optimized Database Queries
-
-🛠 Tech Stack
-Backend:
-
-Python 3.12
-
-Django 5.2
-
-Django REST Framework
-
-SimpleJWT for Authentication
-
-PostgreSQL Database
-
-Redis for Caching & Channels Layer
-
-Django Channels for WebSockets
-
-Testing:
-
-pytest
-
-pytest-django
-
-pytest-cov
-
-Factory Boy
-
-🚀 Setup
-Prerequisites
-Python 3.12+
-
-PostgreSQL
-
-Redis
-
-Virtual Environment (recommended)
-
-Installation
-Clone the repository:
-
-bash
-git clone https://github.com/yourusername/ecommerce-api.git
-cd ecommerce-api
-Create and activate virtual environment:
-
-bash
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
-Install dependencies:
-
-bash
-pip install -r requirements.txt
-Environment Variables
-Create a .env file in the project root:
-
-ini
+```env
 DEBUG=True
 SECRET_KEY=your-secret-key-here
 DB_NAME=ecommerce
@@ -157,133 +112,149 @@ DB_PASSWORD=postgres
 DB_HOST=localhost
 DB_PORT=5432
 REDIS_URL=redis://localhost:6379/1
-Database Setup
-Create PostgreSQL database:
+```
 
-sql
-CREATE DATABASE ecommerce;
-CREATE USER ecommerce_user WITH PASSWORD 'ecommerce_pass';
-ALTER ROLE ecommerce_user SET client_encoding TO 'utf8';
-ALTER ROLE ecommerce_user SET default_transaction_isolation TO 'read committed';
-ALTER ROLE ecommerce_user SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE ecommerce TO ecommerce_user;
-Run migrations:
+### Database Setup
 
-bash
-python manage.py migrate
-Create superuser:
+1. **Create PostgreSQL database**
+   ```sql
+   CREATE DATABASE ecommerce;
+   CREATE USER ecommerce_user WITH PASSWORD 'ecommerce_pass';
+   ALTER ROLE ecommerce_user SET client_encoding TO 'utf8';
+   ALTER ROLE ecommerce_user SET default_transaction_isolation TO 'read committed';
+   ALTER ROLE ecommerce_user SET timezone TO 'UTC';
+   GRANT ALL PRIVILEGES ON DATABASE ecommerce TO ecommerce_user;
+   ```
 
-bash
-python manage.py createsuperuser
-Running the Server
-Start Redis server (in separate terminal):
+2. **Run migrations**
+   ```bash
+   python manage.py migrate
+   ```
 
-bash
-redis-server
-Run Django development server:
+3. **Create superuser**
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-bash
-python manage.py runserver
-For WebSockets, run Daphne:
+### Running the Application
 
-bash
-daphne ecommerce_api.asgi:application
-📚 API Documentation
-Authentication
-Base URL: /api/auth/
+1. **Start Redis server** (in separate terminal)
+   ```bash
+   redis-server
+   ```
 
-Endpoint	Method	Description	Auth Required
-/register/	POST	Register new user	No
-/login/	POST	Get JWT tokens	No
-/login/refresh/	POST	Refresh access token	No
-/profile/	GET/PUT	View/update user profile	Yes
-Products
-Base URL: /api/products/
+2. **Run Django development server**
+   ```bash
+   python manage.py runserver
+   ```
 
-Endpoint	Method	Description	Auth Required
-/	GET	List all products (paginated)	No
-/	POST	Create new product	Admin
-/{id}/	GET	Get product details	No
-/{id}/	PUT	Update product	Admin
-/{id}/	DELETE	Delete product	Admin
-Filters:
+3. **For WebSocket support, run Daphne**
+   ```bash
+   daphne ecommerce_api.asgi:application
+   ```
 
-?category={id}
+## 📚 API Documentation
 
-?min_price={value}
+### 🔐 Authentication Endpoints
+**Base URL:** `/api/auth/`
 
-?max_price={value}
+| Endpoint | Method | Description | Auth Required |
+|----------|---------|-------------|---------------|
+| `/register/` | POST | Register new user | No |
+| `/login/` | POST | Get JWT tokens | No |
+| `/login/refresh/` | POST | Refresh access token | No |
+| `/profile/` | GET/PUT | View/update user profile | Yes |
 
-?in_stock=true
+### 📦 Product Endpoints
+**Base URL:** `/api/products/`
 
-Orders
-Base URL: /api/
+| Endpoint | Method | Description | Auth Required |
+|----------|---------|-------------|---------------|
+| `/` | GET | List all products (paginated) | No |
+| `/` | POST | Create new product | Admin |
+| `/{id}/` | GET | Get product details | No |
+| `/{id}/` | PUT | Update product | Admin |
+| `/{id}/` | DELETE | Delete product | Admin |
 
-Endpoint	Method	Description	Auth Required
-/cart/	GET	View cart contents	Yes
-/cart/items/	POST	Add item to cart	Yes
-/cart/items/	DELETE	Remove item from cart	Yes
-/orders/	GET	List user's orders	Yes
-/orders/	POST	Create new order from cart	Yes
-/orders/{id}/	GET	Get order details	Yes
-/orders/{id}/status/	PATCH	Update order status (Admin)	Admin
-WebSockets
-Endpoint: ws://localhost:8000/ws/notifications/
+**Available Filters:**
+- `?category={id}` - Filter by category
+- `?min_price={value}` - Minimum price filter
+- `?max_price={value}` - Maximum price filter
+- `?in_stock=true` - Show only in-stock items
 
-Connect with valid JWT token
+### 🛒 Order Management Endpoints
+**Base URL:** `/api/`
 
-Receive real-time order status updates
+| Endpoint | Method | Description | Auth Required |
+|----------|---------|-------------|---------------|
+| `/cart/` | GET | View cart contents | Yes |
+| `/cart/items/` | POST | Add item to cart | Yes |
+| `/cart/items/` | DELETE | Remove item from cart | Yes |
+| `/orders/` | GET | List user's orders | Yes |
+| `/orders/` | POST | Create new order from cart | Yes |
+| `/orders/{id}/` | GET | Get order details | Yes |
+| `/orders/{id}/status/` | PATCH | Update order status (Admin) | Admin |
 
-Messages format:
+### 🔔 WebSocket Notifications
+**Endpoint:** `ws://localhost:8000/ws/notifications/`
 
-json
+Connect with a valid JWT token to receive real-time order status updates.
+
+**Message Format:**
+```json
 {
   "type": "order_update",
   "order_id": 123,
   "status": "shipped",
   "message": "Your order has been shipped"
 }
-🧪 Testing
-Run all tests with coverage:
+```
 
-bash
+## 🧪 Testing
+
+Run the complete test suite with coverage:
+
+```bash
 pytest --cov --cov-report=html
-Key test files:
+```
 
-core/tests/ - Authentication & user tests
+**Test Structure:**
+- `core/tests/` - Authentication & user management tests
+- `products/tests/` - Product model & API view tests
+- `orders/tests/` - Cart, orders & WebSocket functionality tests
 
-products/tests/ - Product model & view tests
+**View coverage report:**
+```bash
+# macOS
+open htmlcov/index.html
 
-orders/tests/ - Cart, orders & WebSocket tests
+# Windows
+start htmlcov/index.html
+```
 
-View coverage report:
+## 🚀 Deployment
 
-bash
-open htmlcov/index.html  # macOS
-start htmlcov/index.html  # Windows
-🚀 Deployment
-Production Settings
-Update .env:
+### Production Environment Setup
 
-ini
+Update your `.env` file for production:
+
+```env
 DEBUG=False
 ALLOWED_HOSTS=yourdomain.com
 SECURE_SSL_REDIRECT=True
 SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
-Recommended stack:
+```
 
-Gunicorn/UVicorn + Nginx
+### Recommended Production Stack
+- **Application Server:** Gunicorn/Uvicorn + Nginx
+- **Database:** PostgreSQL
+- **Caching:** Redis
+- **WebSockets:** Daphne
 
-PostgreSQL
+### Sample Nginx Configuration
 
-Redis
-
-Daphne for WebSockets
-
-Sample Nginx config:
-
-nginx
+```nginx
 server {
     listen 80;
     server_name yourdomain.com;
@@ -301,45 +272,41 @@ server {
         proxy_set_header Connection "upgrade";
     }
 }
-🛠 Troubleshooting
-Redis Connection Issues:
+```
 
-Ensure Redis server is running
+## 🛠 Troubleshooting
 
-Check Redis version (requires 5.0+)
+### Redis Connection Issues
+- Ensure Redis server is running: `redis-server`
+- Check Redis version (requires 5.0+): `redis-server --version`
+- Verify Redis URL in your environment settings
 
-Verify Redis URL in settings
+### Database Connection Problems
+- Confirm PostgreSQL service is running
+- Verify database credentials in `.env` file
+- Run migrations if there are schema changes: `python manage.py migrate`
 
-Database Errors:
+### WebSocket Connection Issues
+- Ensure Daphne server is running for WebSocket support
+- Check Redis configuration for channels layer
+- Verify proxy configuration for WebSocket connections
 
-Check PostgreSQL service is running
+## 🤝 Contributing
 
-Verify database credentials in .env
+We welcome contributions! Please follow these steps:
 
-Run python manage.py migrate if schema changes
+1. **Fork** the project
+2. **Create** your feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
 
-WebSocket Problems:
+## 📜 License
 
-Ensure Daphne is running
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Check Redis is configured for channels
+---
 
-Verify Nginx/Apache WebSocket proxying
+**Built with ❤️ using Django REST Framework**
 
-🤝 Contributing
-Fork the project
-
-Create your feature branch (git checkout -b feature/AmazingFeature)
-
-Commit your changes (git commit -m 'Add some AmazingFeature')
-
-Push to the branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
-
-📜 License
-Distributed under the MIT License. See LICENSE for more information.
-
-This README provides comprehensive documentation for setting up, using, and maintaining the e-commerce API. The markdown formatting ensures good readability on GitHub and other platforms. Let me know if you'd like me to add or modify any sections!
-
-
+For questions or support, please open an issue or contact the maintainers.
